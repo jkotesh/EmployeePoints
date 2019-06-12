@@ -13,8 +13,8 @@ Points
                             <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                 <tr>
+                                    <th></th>
                                     <th>Name</th>
-                                    <th>Image</th>
                                     <th>Date / Points</th>
                                     <th>Total Points</th>
                                 </tr>
@@ -22,7 +22,6 @@ Points
                                 <tbody>
                                 @foreach($employeepoints as $point)
                                 <tr>
-                                    <td><h3>{{$point['name']}}</h3></td>
                                     <?php 
                                     if(!empty($point['profile_image']))
                                       {
@@ -38,6 +37,7 @@ Points
                                         <img src="<?php echo  $profile_image; ?>" class="img-responsive rounded-circle" alt="user">
                                        </div>
                                     </td>
+                                    <td><h3>{{$point['name']}}</h3></td>
                                     <td>
                                         <marquee style="font-size: x-large;" scrolldelay="200">
                                         @foreach($point['datewisepoints'] as $date)
