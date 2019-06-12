@@ -39,7 +39,7 @@ Points
                                     </td>
                                     <td><h3>{{$point['name']}}</h3></td>
                                     <td>
-                                        <marquee style="font-size: x-large;" scrolldelay="200">
+                                        <marquee style="font-size: x-large;" scrolldelay="90">
                                         @foreach($point['datewisepoints'] as $date)
                                              @if($date->points < 0)
                                              <span style="color: red;">{{$date->date}}({{$date->points}})</span>

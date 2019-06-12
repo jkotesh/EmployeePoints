@@ -34,7 +34,7 @@ Points
                                     <td>{{$point->points}}</td>
                                     @if($privileges['Edit']=='true')
                                     <td>
-                                        <a href="{{env('APP_URL')}}/points/{{$point->id}}/edit" style="cursor: pointer;font-size: x-large;">
+                                        <a href="{{env('ADMIN_URL')}}/points/{{$point->id}}/edit" style="cursor: pointer;font-size: x-large;">
                                         <i class="ion-compose"></i></a>
                                         </td>
                                         @endif
