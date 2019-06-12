@@ -25,7 +25,7 @@ Employees
                                       } 
                                       else 
                                        { 
-                                            $profile_image = 'assets/images/users/default.jpg';
+                                            $profile_image = env('APP_URL').'/assets/images/users/default.jpg';
                                        }
                                 ?>
                                 <img src="<?php echo  $profile_image; ?>" class="img-responsive rounded-circle" alt="user">
@@ -36,7 +36,7 @@ Employees
                                     <h2 data-plugin="counterup">{{$employee->total_points}}</h2>
                                     <div class="user-position">
                                        @if($privileges['Edit']=='true')
-                                        <a href="{{env('APP_URL')}}/dashboard/{{$employee->id}}/edit" style="cursor: pointer;float: right;font-size: x-large;    top: -69px;position: relative;">
+                                        <a href="{{env('ADMIN_URL')}}/dashboard/{{$employee->id}}/edit" style="cursor: pointer;float: right;font-size: x-large;    top: -69px;position: relative;">
                                         <i class="ion-compose" style="left: 24px;position: relative;"></i></a>
                                         @endif
                                         <span class="text-success font-weight-bold" style="   right: 10px;position: relative;">{{$employee->role_name}}</span>

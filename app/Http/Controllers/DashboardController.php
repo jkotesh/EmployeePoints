@@ -158,6 +158,27 @@ class DashboardController extends Controller
             $person->modified_on =   Carbon::now(new DateTimeZone('Asia/Kolkata'));
             $person ->update();
 
+            if(!empty($request->file('logo')))
+            {
+            $path = env('CONTENT_EMPLOYEE_IMAGES');
+            $myfile = $person->profile_image;
+            
+            if (File::exists($myfile))
+                {
+                    File::delete($myfile);
+                }
+            }
+            $category_destinationDir = env('CONTENT_EMPLOYEE_IMAGES');
+             if($files=$request->file('logo')){
+                $name = $files->getClientOriginalName();
+                $extension = $files->getClientOriginalExtension();
+                $filename = $id . '.' . $extension;
+                $person->profile_image = env('APP_URL'). '/' . $category_destinationDir.'/'. $filename;
+                
+                $person->Update();
+                $files->move($category_destinationDir,$filename);
+             }
+
             $log = new Log();
             $log->module_id=1;
             $log->action='update';      

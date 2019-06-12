@@ -11,12 +11,16 @@
 |
 */
 
+Route::group(['prefix' => 'admin'], function () 
+{
+	Route::resource('/', 'LoginController');
+	Route::post('validateuser', array('as' => 'validateuser', 'uses' => 'LoginController@validateuser'));
 
-Route::resource('/', 'LoginController');
-Route::post('validateuser', array('as' => 'validateuser', 'uses' => 'LoginController@validateuser'));
+	Route::resource('dashboard', 'DashboardController');
+	Route::get('logout', 'LoginController@logout');
+	Route::resource('profile', 'ProfileController');
+	Route::resource('points', 'PointsController');
+	Route::resource('employee', 'EmployeeController');
+});
 
-Route::resource('dashboard', 'DashboardController');
-Route::get('logout', 'LoginController@logout');
-Route::resource('profile', 'ProfileController');
-Route::resource('points', 'PointsController');
-Route::resource('employee', 'EmployeeController');
+Route::resource('/', 'EmployeePointsController');

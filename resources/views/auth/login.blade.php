@@ -37,7 +37,7 @@
                             </div>
                         @endif
                         </div>
-                        <form class="m-t-20" method="POST" action="{{URL::to('validateuser')}}">
+                        <form class="m-t-20" method="POST" action="{{env('ADMIN_URL')}}/validateuser">
                             @csrf
                             <div class="form-group row">
                                 <div class="col-12">

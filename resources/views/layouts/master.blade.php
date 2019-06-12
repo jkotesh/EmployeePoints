@@ -93,12 +93,12 @@
                                     </div>
 
                                     <!-- item-->
-                                    <a href="{{URL::to('profile')}}" class="dropdown-item notify-item">
+                                    <a href="{{env('ADMIN_URL')}}/profile" class="dropdown-item notify-item">
                                         <i class="zmdi zmdi-account-circle"></i> <span>Profile</span>
                                     </a>
 
                                     <!-- item-->
-                                    <a href="{{URL::to('logout')}}" class="dropdown-item notify-item">
+                                    <a href="{{env('ADMIN_URL')}}/logout" class="dropdown-item notify-item">
                                         <i class="zmdi zmdi-power"></i> <span>Logout</span>
                                     </a>
 
@@ -121,10 +121,10 @@
                         <!-- Navigation Menu-->
                         <ul class="navigation-menu">
                             <li>
-                                <a href="{{URL::to('dashboard')}}"><i class="zmdi zmdi-view-dashboard"></i> <span> Dashboard </span> </a>
+                                <a href="{{env('ADMIN_URL')}}/dashboard"><i class="zmdi zmdi-view-dashboard"></i> <span> Dashboard </span> </a>
                             </li>
                             <li>
-                                <a href="{{URL::to('points')}}"><i class="zmdi zmdi-view-dashboard"></i> <span> Points </span> </a>
+                                <a href="{{env('ADMIN_URL')}}/points"><i class="zmdi zmdi-view-dashboard"></i> <span> Points </span> </a>
                             </li>
                         </ul>
                         <!-- End navigation menu  -->

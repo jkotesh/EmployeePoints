@@ -1,7 +1,8 @@
 <?php 
 use App\RoleModulePrivileges;
 use App\Defaults;
-use App\Recipe;
+use App\AdminUsers;
+use App\Points;
 use App\Log;
 use Carbon\Carbon;
 
@@ -101,6 +102,40 @@ function createThumbnailImage($sourceDir,$identity,$extension)
     imagecopyresampled($dst,$image,0,0,0,0,$width,$height,$width,$height);
 
     imagejpeg($dst,$dest_image, $quality);
+}
+
+function getpoints()
+{
+    $points = Points::join('admin_users', 'admin_users.id', '=', 'employee_points_daily.employee_id')
+        ->select(DB::raw('employee_points_daily.employee_id,admin_users.name,admin_users.profile_image,sum(employee_points_daily.points) as totalpoints'))
+        ->Groupby('employee_id','name','profile_image')
+        ->get();
+    if(count($points) > 0)
+    {
+        foreach ($points as $key => $value) 
+        {
+            $Data[$key]['employee_id'] = $value->employee_id;
+            $Data[$key]['name'] = $value->name;
+            $Data[$key]['profile_image'] = $value->profile_image;
+            $Data[$key]['totalpoints'] = $value->totalpoints;
+            $Data[$key]['datewisepoints'] = employeedatewisepoints($value->employee_id);
+        }
+        $Finaldata = $Data;
+    }
+    else
+    {
+        $Finaldata = [];
+    }
+    return $Finaldata;
+}
+
+function employeedatewisepoints($employee_id)
+{
+    $employeepoints = DB::table('employee_points_daily')
+        ->select(DB::raw('employee_points_daily.points,employee_points_daily.date'))
+        ->where('employee_points_daily.employee_id','=',$employee_id)
+        ->get();
+    return $employeepoints;
 }
 
 ?>

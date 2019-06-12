@@ -110,7 +110,7 @@ class PointsController extends Controller
             $log = new Log();
             $log->module_id=2;
             $log->action='create';      
-            $log->description= $employee->name . 'got '.$points->points.' on '. $points->date;
+            $log->description= $employee->name . ' got '.$points->points.' on '. $points->date;
             $log->created_on=  Carbon::now(new DateTimeZone('Asia/Kolkata'));
             $log->user_id=Session::get('user_id'); 
             $log->category=1;    
