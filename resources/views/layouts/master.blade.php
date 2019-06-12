@@ -74,7 +74,17 @@
                             <li class="list-inline-item dropdown notification-list">
                                 <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
                                    aria-haspopup="false" aria-expanded="false">
-                                    <img src="{{env('APP_URL')}}/assets/images/users/default.jpg" alt="user" class="rounded-circle">
+                                   <?php 
+                                    if(!empty(Session::get("profile_image")))
+                                      {
+                                        $profile_image = Session::get("profile_image");
+                                      } 
+                                      else 
+                                       { 
+                                         $profile_image = env('APP_URL').'/assets/images/users/default.jpg';
+                                       }
+                                    ?>
+                                    <img src="<?php  echo $profile_image;?>" alt="user" class="rounded-circle">
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right profile-dropdown " aria-labelledby="Preview">
                                     <!-- item-->
