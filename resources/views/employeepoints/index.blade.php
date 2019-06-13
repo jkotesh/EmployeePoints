@@ -18,7 +18,7 @@ Points
                                     <th>Photo</th>
                                     <th>Name</th>
                                     <th>Designation</th>
-                                    <th>Previous Dates / Points</th>
+                                    <th>Date / Point</th>
                                     <th>Total Points</th>
                                 </tr>
                                 </thead>
