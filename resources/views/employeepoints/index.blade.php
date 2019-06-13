@@ -46,7 +46,7 @@ Points
                                              @if($date->points < 0)
                                              <span style="color: red;">{{$date->date}}({{$date->points}})</span>
                                              @else
-                                             <span style="color: green;">{{$date->date}}</span><span style="color: black;">({{$date->points}})</span>
+                                             <span style="color:  #137ad4;">{{$date->date}}</span><span style="color: black;">({{$date->points}})</span>
                                              @endif
                                         @endforeach
                                         </marquee>
