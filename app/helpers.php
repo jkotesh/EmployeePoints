@@ -107,10 +107,10 @@ function createThumbnailImage($sourceDir,$identity,$extension)
 function getpoints()
 {
     $points = Points::join('admin_users', 'admin_users.id', '=', 'employee_points_daily.employee_id')
-        ->select(DB::raw('employee_points_daily.employee_id,admin_users.name,admin_users.profile_image,sum(employee_points_daily.points) as totalpoints,employeeno'))
-        ->Groupby('employee_id','name','profile_image','employeeno')
+        ->select(DB::raw('employee_points_daily.employee_id,admin_users.name,admin_users.designation,admin_users.profile_image,sum(employee_points_daily.points) as totalpoints,employeeno'))
+        ->Groupby('employee_id','name','profile_image','employeeno','designation')
         ->Orderby('totalpoints','desc')
-        ->get()->random(10);
+        ->get()->random(5);
     if(count($points) > 0)
     {
         foreach ($points as $key => $value) 
@@ -119,6 +119,7 @@ function getpoints()
             $Data[$key]['name'] = $value->name;
             $Data[$key]['employeeno'] = $value->employeeno;
             $Data[$key]['profile_image'] = $value->profile_image;
+            $Data[$key]['designation'] = $value->designation;
             $Data[$key]['totalpoints'] = $value->totalpoints;
             $Data[$key]['datewisepoints'] = employeedatewisepoints($value->employee_id);
         }

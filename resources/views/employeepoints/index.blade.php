@@ -13,9 +13,10 @@ Points
                             <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                 <tr>
-                                    <th>Profile</th>
+                                    <th>Photo</th>
                                     <th>Employee Id</th>
                                     <th>Name</th>
+                                    <th>Designation</th>
                                     <th>Date / Points</th>
                                     <th>Total Points</th>
                                 </tr>
@@ -40,6 +41,7 @@ Points
                                     </td>
                                     <td width="7%"><h3>{{$point['employeeno']}}</h3></td>
                                     <td width="15%"><h3>{{$point['name']}}</h3></td>
+                                    <td width="15%"><h3>{{$point['designation']}}</h3></td>
                                     <td width="30%">
                                         <marquee style="font-size: x-large;" scrolldelay="90">
                                         @foreach($point['datewisepoints'] as $date)
@@ -59,5 +61,11 @@ Points
                         </div>
                     </div>
                 </div>
-
+<script type="text/javascript">
+    function autoRefreshPage()
+    {
+        window.location = window.location.href;
+    }
+    setInterval('autoRefreshPage()', 10000);
+</script>
 @endsection
