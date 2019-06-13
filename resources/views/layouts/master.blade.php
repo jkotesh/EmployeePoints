@@ -10,7 +10,7 @@
     <title>@yield('title')</title>    
 
     <!-- App Favicon -->
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/fav.png') }}">
 
     <!-- form Uploads -->
     <link href="{{ asset('assets/plugins/fileuploads/css/dropify.min.css') }}" rel="stylesheet" type="text/css" />
