@@ -104,22 +104,48 @@ function createThumbnailImage($sourceDir,$identity,$extension)
     imagejpeg($dst,$dest_image, $quality);
 }
 
-function getpoints()
+function departmentwise()
+{
+    $departmentwise = DB::table('admin_users')
+    ->join('role', 'role.id', '=', 'admin_users.role_id')
+    ->select(DB::raw('admin_users.role_id,role.name'))
+    ->where('role.role_type','=',2)
+    ->Groupby('admin_users.role_id','role.name')
+    ->get();
+    if(count($departmentwise) > 0)
+    {
+        foreach ($departmentwise as $key => $value) 
+        {
+            $Data[$key]['role_id'] = $value->role_id;
+            $Data[$key]['role_name'] = $value->name;
+            $Data[$key]['employees'] = getpoints($value->role_id);
+        }
+        $Finaldata = $Data;
+    }
+    else
+    {
+        $Finaldata = [];
+    }
+    return $Finaldata;
+}
+
+function getpoints($role_id)
 {
     $points = Points::join('admin_users', 'admin_users.id', '=', 'employee_points_daily.employee_id')
-        ->select(DB::raw('employee_points_daily.employee_id,admin_users.name,admin_users.designation,admin_users.profile_image,sum(employee_points_daily.points) as totalpoints,employeeno'))
+        ->select(DB::raw('employee_points_daily.employee_id,admin_users.name,admin_users.profile_image,sum(employee_points_daily.points) as totalpoints,employeeno,admin_users.designation'))
+        ->where('admin_users.role_id','=',$role_id)
         ->Groupby('employee_id','name','profile_image','employeeno','designation')
         ->Orderby('totalpoints','desc')
-        ->get()->random(5);
+        ->get();
     if(count($points) > 0)
     {
         foreach ($points as $key => $value) 
         {
             $Data[$key]['employee_id'] = $value->employee_id;
             $Data[$key]['name'] = $value->name;
+            $Data[$key]['designation'] = $value->designation;
             $Data[$key]['employeeno'] = $value->employeeno;
             $Data[$key]['profile_image'] = $value->profile_image;
-            $Data[$key]['designation'] = $value->designation;
             $Data[$key]['totalpoints'] = $value->totalpoints;
             $Data[$key]['datewisepoints'] = employeedatewisepoints($value->employee_id);
         }

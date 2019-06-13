@@ -25,7 +25,19 @@ class EmployeePointsController extends Controller
 {
 	public function index()
     {
-        $employeepoints = getpoints();
-        return view('employeepoints.index', compact('employeepoints'));
+    	$role = Role::where('role_type','=',2)->inRandomOrder()->get();
+    	if (count($role) > 0) 
+    	{
+    		$role_id = $role[0]->id;
+    		$role_name = $role[0]->name;
+    	}
+    	else
+    	{
+    		$role_id = 0;
+    		$role_name = "";
+    	}
+        $employeepoints = getpoints($role_id);
+        return view('employeepoints.index', compact('employeepoints'))
+        ->with('role_name',$role_name);
     }
 }

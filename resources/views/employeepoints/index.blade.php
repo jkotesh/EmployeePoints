@@ -10,20 +10,22 @@ Points
     <div class="row">
                     <div class="col-12">
                         <div class="card-box">
+                          <h2 class="text-center">{{$role_name}}</h2>
                             <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                 <tr>
+                                    <th>ID.No</th>
                                     <th>Photo</th>
-                                    <th>Employee Id</th>
                                     <th>Name</th>
                                     <th>Designation</th>
-                                    <th>Date / Points</th>
+                                    <th>Previous Dates / Points</th>
                                     <th>Total Points</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($employeepoints as $point)
                                 <tr>
+                                   <td width="7%"><h3>{{$point['employeeno']}}</h3></td>
                                     <?php 
                                     if(!empty($point['profile_image']))
                                       {
@@ -39,7 +41,6 @@ Points
                                         <img src="<?php echo  $profile_image; ?>" class="img-responsive rounded-circle" alt="user">
                                        </div>
                                     </td>
-                                    <td width="7%"><h3>{{$point['employeeno']}}</h3></td>
                                     <td width="15%"><h3>{{$point['name']}}</h3></td>
                                     <td width="15%"><h3>{{$point['designation']}}</h3></td>
                                     <td width="30%">
