@@ -167,5 +167,4 @@ function employeedatewisepoints($employee_id)
         ->get();
     return $employeepoints;
 }
-
 ?>

@@ -40,4 +40,23 @@ class EmployeePointsController extends Controller
         return view('employeepoints.index', compact('employeepoints'))
         ->with('role_name',$role_name);
     }
+
+    public function EmployeeDetails()
+    {
+        $employees = AdminUsers::inRandomOrder()->get();
+        if (count($employees) > 0) 
+        {
+            $emp_id = 13;
+            $emp_name = $employees[0]->name;
+        }
+        else
+        {
+            $emp_id = 0;
+            $emp_name = "";
+        }
+        $employee = AdminUsers::find($emp_id);
+        $employeedetails = employeedatewisepoints($emp_id);
+        return view('employeepoints.employeedetails', compact('employeedetails'))
+        ->with('employee',$employee);
+    }
 }

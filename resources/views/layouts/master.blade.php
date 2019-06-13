@@ -47,7 +47,7 @@
 
                     <!-- LOGO -->
                     <div class="topbar-left">
-                        <a href="{{ url('/') }}" class="logo">
+                        <a href="{{env('ADMIN_URL')}}" class="logo">
                             <i class="zmdi zmdi-group-work icon-c-logo"></i>
                             <span>{{ env('APP_NAME') }}</span>
                         </a>
@@ -114,7 +114,7 @@
             </div>
             <!-- end topbar-main -->
 
-
+           
             <div class="navbar-custom">
                 <div class="container">
                     <div id="navigation">
@@ -126,11 +126,19 @@
                             <li>
                                 <a href="{{env('ADMIN_URL')}}/points"><i class="zmdi zmdi-view-dashboard"></i> <span> Points </span> </a>
                             </li>
+                         <?php
+                            if(in_array(Session::get("role_id"),array(1)))
+                            { ?> 
+                            <li>
+                                <a href="{{env('ADMIN_URL')}}/privileges"><i class="zmdi zmdi-view-dashboard"></i> <span> Privileges </span> </a>
+                            </li>
+                            <?php } ?>
                         </ul>
                         <!-- End navigation menu  -->
                     </div>
                 </div>
             </div>
+        
         </header>
         <!-- End Navigation Bar-->
 

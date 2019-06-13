@@ -19,8 +19,14 @@ Points
                                 <thead>
                                 <tr>
                                     <th>Date</th>
+                                    <?php 
+                                    if(in_array(Session::get("role_id"),array(1)))
+                                    {
+                                    ?>
                                     <th>Name</th>
+                                    <?php } ?>
                                     <th>Points</th>
+                                    <th>Comments</th>
                                     @if($privileges['Edit']=='true')
                                     <th>Actions</th>
                                     @endif
@@ -30,8 +36,14 @@ Points
                                 @foreach($points as $point)
                                 <tr>
                                     <td>{{$point->date}}</td>
+                                    <?php 
+                                    if(in_array(Session::get("role_id"),array(1)))
+                                    {
+                                    ?>
                                     <td>{{$point->name}}</td>
+                                    <?php } ?>
                                     <td>{{$point->points}}</td>
+                                    <td>{{$point->comments}}</td>
                                     @if($privileges['Edit']=='true')
                                     <td>
                                         <a href="{{env('ADMIN_URL')}}/points/{{$point->id}}/edit" style="cursor: pointer;font-size: x-large;">

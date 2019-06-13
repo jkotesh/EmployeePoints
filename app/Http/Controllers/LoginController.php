@@ -94,7 +94,7 @@ class LoginController extends Controller
                             Session::put("status",$logindetails[0]->status);
                             Session::put("mobileno",$logindetails[0]->mobileno);
                             Session::put("profile_image",$logindetails[0]->profile_image);
-                            
+
                             return Redirect::route('dashboard.index');
                         }
                         else {

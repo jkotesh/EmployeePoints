@@ -12,29 +12,49 @@ Employees
 @endsection
 @section('content')
 @include('components.message')
+
+
+
+
 <div class="row">
-                  <?php if(count($employees) > 0) {?>
-                  @foreach($employees as $employee)
-                    <div class="col-md-6  col-xl-3">
-                        <div class="card-box widget-user">
-                            <div>
-                                <?php 
+                    <div class="col-12">
+                        <div class="card-box">
+                            <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                <thead>
+                                <tr>
+                                    <th>ID.No</th>
+                                    <th>Photo</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Team</th>
+                                    <th>Designation</th>
+                                    <th>Total Points</th>
+                                    @if($privileges['Edit']=='true')
+                                    <th>Actions</th>
+                                    @endif
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($employees as $employee)
+                                <tr>
+                                   <td width="7%">{{$employee->employeeno}}</td>
+                                    <?php 
                                     if(!empty($employee->profile_image))
                                       {
                                         $profile_image = $employee->profile_image;
                                       } 
                                       else 
                                        { 
-                                            $profile_image = env('APP_URL').'/assets/images/users/default.jpg';
+                                         $profile_image = env('APP_URL').'/assets/images/users/default.jpg';
                                        }
-                                ?>
-                                <img src="<?php echo  $profile_image; ?>" class="img-responsive rounded-circle" alt="user">
-
-                                <div class="wid-u-info">
-                                    <h5 class="m-t-20 m-b-5">{{$employee->name}}</h5>
-                                    <h5 class="m-t-20 m-b-5">{{$employee->designation}}</h5>
-                                    <!-- <h5 class="m-t-20 m-b-5">{{$employee->employeeno}}</h5> -->
-                                    <?php
+                                    ?>
+                                    <td width="5%">
+                                      <div class="widget-user">
+                                        <img src="<?php echo  $profile_image; ?>" class="img-responsive rounded-circle" alt="user">
+                                       </div>
+                                    </td>
+                                    <td width="15%">{{$employee->name}}</td>
+                                    <td width="15%"><?php
                                     if(strlen($employee->email)>20){
 
                                         $email_body=substr($employee->email,0,20)."...";
@@ -45,23 +65,22 @@ Employees
 
                                     }
                                   ?>
-                                    <p class="text-muted mb-0 font-13">{{$email_body}}</p>
-                                    <h2 data-plugin="counterup">{{$employee->total_points}}</h2>
-                                    <div class="user-position">
-                                       @if($privileges['Edit']=='true')
-                                        <a href="{{env('ADMIN_URL')}}/dashboard/{{$employee->id}}/edit" style="cursor: pointer;float: right;font-size: x-large;    top: -69px;position: relative;">
-                                        <i class="ion-compose" style="left: 24px;position: relative;"></i></a>
+                                    {{$email_body}}
+                                  </td>
+                                    <td width="15%">{{$employee->role_name}}</td>
+                                    <td width="15%">{{$employee->designation}}</td>
+                                    <td width="8%"> {{$employee->total_points}}</td>
+                                    @if($privileges['Edit']=='true')
+                                    <td>
+                                        <a href="{{env('ADMIN_URL')}}/dashboard/{{$employee->id}}/edit" style="cursor: pointer;font-size: x-large;">
+                                        <i class="ion-compose"></i></a>
+                                        </td>
                                         @endif
-                                        <span class="text-success font-weight-bold" style="   right: 10px;position: relative;">{{$employee->role_name}}</span>
-                                    </div>
-                                </div>
-                            </div>
+                                </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
                         </div>
-                    </div>   
-                 @endforeach
-                <?php } else {?>
-                   <h5 class="m-t-20 m-b-5">No Employee Found</h5>
-                 <?php } ?>               
-            </div>
-
+                    </div>
+                </div>
 @endsection

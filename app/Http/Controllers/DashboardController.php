@@ -39,10 +39,22 @@ class DashboardController extends Controller
             return Redirect::to('/admin');
         $privileges = $this->getPrivileges();
 
-        $employees = DB::table('admin_users')
+        if(!in_array(Session::get("role_id"),array(1)))
+        {
+            $employee_id = Session::get("user_id");
+            $employees = DB::table('admin_users')
                ->join('role', 'role.id', '=', 'admin_users.role_id')
-                ->select(DB::raw('admin_users.*,role.name as role_name,if(ifnull(admin_users.status,1)=1,"Active","Inactive") as status,employeeno'))
+                ->select(DB::raw('admin_users.*,role.name as role_name,if(ifnull(admin_users.status,1)=1,"Active","Inactive") as status'))
+                ->where('admin_users.id','=',$employee_id)
                 ->get();
+        }
+        else
+        {
+            $employees = DB::table('admin_users')
+               ->join('role', 'role.id', '=', 'admin_users.role_id')
+                ->select(DB::raw('admin_users.*,role.name as role_name,if(ifnull(admin_users.status,1)=1,"Active","Inactive") as status'))
+                ->get();
+        }
         return view('dashboard.index', compact('employees'))         
         ->with('privileges',$privileges);
     }

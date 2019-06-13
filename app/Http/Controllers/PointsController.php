@@ -44,9 +44,20 @@ class PointsController extends Controller
         if ( !Session::has('user_id') || Session::get('user_id') == '' )
         return Redirect::to('/admin');
         $privileges = $this->getPrivileges();
-        $points = Points::join('admin_users', 'admin_users.id', '=', 'employee_points_daily.employee_id')
-                ->select(DB::raw('employee_points_daily.id,admin_users.name,employee_points_daily.points,date'))
+        if(!in_array(Session::get("role_id"),array(1)))
+        {
+            $employee_id = Session::get("user_id");
+            $points = Points::join('admin_users', 'admin_users.id', '=', 'employee_points_daily.employee_id')
+                ->select(DB::raw('employee_points_daily.id,admin_users.name,employee_points_daily.points,date,comments'))
+            ->where('employee_points_daily.employee_id','=',$employee_id)
             ->get();
+        }
+        else
+        {
+            $points = Points::join('admin_users', 'admin_users.id', '=', 'employee_points_daily.employee_id')
+                ->select(DB::raw('employee_points_daily.id,admin_users.name,employee_points_daily.points,date,comments'))
+            ->get();
+        }
 
          return View::make('points.index', compact('points'))         
         ->with('privileges',$privileges);
