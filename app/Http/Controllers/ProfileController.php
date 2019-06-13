@@ -97,7 +97,7 @@ class ProfileController extends Controller
                 ->update(['password' =>  Hash::make(Input::get('password'))]);
 
                Session::flush();
-               return redirect('/')->with('success','Updated Password Successfully!');
+               return redirect('/admin')->with('success','Updated Password Successfully!');
             }
         }
     }

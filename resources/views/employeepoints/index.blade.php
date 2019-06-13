@@ -51,7 +51,7 @@ Points
                                         @endforeach
                                         </marquee>
                                     </td>
-                                    <td width="10%"> <h3>{{$point['totalpoints']}}</h3></td>
+                                    <td width="8%"> <h3>{{$point['totalpoints']}}</h3></td>
                                 </tr>
                                 @endforeach
                                 </tbody>

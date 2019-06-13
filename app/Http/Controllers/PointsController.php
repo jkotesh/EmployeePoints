@@ -42,7 +42,7 @@ class PointsController extends Controller
     public function index()
     {
         if ( !Session::has('user_id') || Session::get('user_id') == '' )
-        return Redirect::to('/');
+        return Redirect::to('/admin');
         $privileges = $this->getPrivileges();
         $points = Points::join('admin_users', 'admin_users.id', '=', 'employee_points_daily.employee_id')
                 ->select(DB::raw('employee_points_daily.id,admin_users.name,employee_points_daily.points,date'))
@@ -60,10 +60,10 @@ class PointsController extends Controller
         public function create()
     {
        if ( !Session::has('user_id') || Session::get('user_id') == '' )
-            return Redirect::to('/');
+            return Redirect::to('/admin');
         $privileges = $this->getPrivileges();
         if($privileges['Add'] !='true')    
-            return Redirect::to('/');       
+            return Redirect::to('/admin');       
         $employees = AdminUsers::all()->pluck('name','id');  
 
         return View::make('points.create')
@@ -142,10 +142,10 @@ class PointsController extends Controller
     public function edit($id)
     {
         if ( !Session::has('user_id') || Session::get('user_id') == '' )
-            return Redirect::to('/');
+            return Redirect::to('/admin');
         $privileges = $this->getPrivileges();
         if($privileges['Edit'] !='true')
-            return Redirect::to('/'); 
+            return Redirect::to('/admin'); 
         $point = Points::find($id);   
         $user = AdminUsers::find($point->employee_id); 
         return View::make('points.edit', compact('user'))

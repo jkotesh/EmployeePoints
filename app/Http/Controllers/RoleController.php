@@ -41,7 +41,7 @@ class RoleController extends Controller
     public function index()
     {
         if ( !Session::has('user_id') || Session::get('user_id') == '' )
-        return Redirect::to('/');
+        return Redirect::to('/admin');
         $privileges = $this->getPrivileges();
        
         $roles = DB::table('role')
@@ -58,10 +58,10 @@ class RoleController extends Controller
     public function create()
     {
         if ( !Session::has('user_id') || Session::get('user_id') == '' )
-            return Redirect::to('/');
+            return Redirect::to('/admin');
         $privileges = $this->getPrivileges();
         if($privileges['Add'] !='true')    
-            return Redirect::to('/'); 
+            return Redirect::to('/admin'); 
 
         return View::make('role.create')
         ->with('privileges',$privileges);

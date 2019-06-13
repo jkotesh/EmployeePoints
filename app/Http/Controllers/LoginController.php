@@ -30,7 +30,7 @@ class LoginController extends Controller
        $valid_session = isset($userid) ? $userid === Session::get('user_id') : FALSE;
        if ($valid_session) 
        {
-           $url = env('APP_URL');
+           $url = env('ADMIN_URL');
            header('Location: '.$url.'/dashboard');
            exit();
         }
@@ -123,7 +123,7 @@ class LoginController extends Controller
     public function logout(Request $request) 
     {
           Session::flush();
-          return redirect('/');
+          return redirect('/admin');
     }
     
     /**

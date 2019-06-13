@@ -35,7 +35,7 @@ class DashboardController extends Controller
     public function index()
     {
     	if ( !Session::has('user_id') || Session::get('user_id') == '' )
-            return Redirect::to('/');
+            return Redirect::to('/admin');
         $privileges = $this->getPrivileges();
 
         $employees = DB::table('admin_users')
@@ -49,7 +49,7 @@ class DashboardController extends Controller
      public function create()
     {
        if ( !Session::has('user_id') || Session::get('user_id') == '' )
-            return Redirect::to('/');
+            return Redirect::to('/admin');
         $privileges = $this->getPrivileges();
         if($privileges['Add'] !='true')    
             return Redirect::to('/');       
@@ -121,7 +121,7 @@ class DashboardController extends Controller
             return Redirect::to('/');
         $privileges = $this->getPrivileges();
         if($privileges['Edit'] !='true')
-            return Redirect::to('/');        
+            return Redirect::to('/admin');        
         $user = AdminUsers::find($id);
         $role = Role::all()->pluck('name','id'); 
  
