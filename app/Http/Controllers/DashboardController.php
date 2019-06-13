@@ -19,6 +19,7 @@ use Image;
 use Carbon\Carbon;
 use DateTimeZone;
 use Hash;
+use Illuminate\Support\Facades\Mail;
 
 class DashboardController extends Controller
 {
@@ -101,10 +102,10 @@ class DashboardController extends Controller
                 $files->move($employee_destinationDir,$filename);
              }  
 
-            $data = array('name'=>$users->full_name,'email'=> $users->email_address,'password' => $UserData['password'] ,'otp' => $otp);
+            $data = array('name'=>$person->name,'email'=> $person->email,'password' => Input::get('password'));
             Mail::send('layouts.registration_verify', $data, function($m) use ($data) {
-                  $m->from("points@samuhacreations.com", "Samuha");
-                  $m->to($data['email'])->subject('Points Management From Samuha');
+                  $m->from("points@samuhacreations.com", "Samuha Creations");
+                  $m->to($data['email'])->subject('Points Management From Samuha Creations');
             });        
 
             $log = new Log();
