@@ -110,7 +110,7 @@ function getpoints()
         ->select(DB::raw('employee_points_daily.employee_id,admin_users.name,admin_users.profile_image,sum(employee_points_daily.points) as totalpoints,employeeno'))
         ->Groupby('employee_id','name','profile_image','employeeno')
         ->Orderby('totalpoints','desc')
-        ->get();
+        ->get()->random(10);
     if(count($points) > 0)
     {
         foreach ($points as $key => $value) 
@@ -136,6 +136,7 @@ function employeedatewisepoints($employee_id)
     $employeepoints = DB::table('employee_points_daily')
         ->select(DB::raw('employee_points_daily.points,employee_points_daily.date'))
         ->where('employee_points_daily.employee_id','=',$employee_id)
+        ->whereMonth('date', '=', date('m'))
         ->get();
     return $employeepoints;
 }
