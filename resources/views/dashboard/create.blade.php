@@ -24,37 +24,43 @@ Add Employee
                             <section>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        {{ Form::ahText('name','Name :','',array('maxlength' => '100'))  }}
+                                        {{ Form::ahText('employeeno','Employee No :','',array('maxlength' => '200'))  }}
                                     </div>
                                     <div class="col-sm-6">
+                                        {{ Form::ahText('name','Name :','',array('maxlength' => '100'))  }}
+                                    </div>
+                                </div>
+                                <div class="row">                                    
+                                    <div class="col-sm-6">
                                         {{ Form::ahText('email','Email :','',array('maxlength' => '100'))  }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ Form::ahPassword('password','Password :',array('maxlength' => '100')) }}
                                     </div>
                                 </div><!-- end row -->
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        {{ Form::ahPassword('password','Password :',array('maxlength' => '100')) }}
-                                    </div>
-                                    <div class="col-sm-6">
                                        {{ Form::ahNumber('mobileno','Mobile No :','',array('min'=>'0','maxlength' => '11','max'=>'99999999999')) }}
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-sm-6">
                                         {{ Form::ahSelect('role_id','Role :',null,$role) }}
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-sm-6">
                                        {{ Form::ahSelect('status','Status :','1',array('1' => 'Active', '2' => 'Inactive')) }}
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="card-box">
 
                                             <h4 class="header-title m-t-0 m-b-30">Upload Profile Image</h4>
 
                                             <input type="file" class="dropify" name="logo" data-default-file="{{env('APP_URL')}}/assets/images/users/default.jpg"  />
                                         </div>
-                                    </div>                                    
+                                    </div>
+                                </div>
+                                <div class="row">
+                                                                        
                                 </div>
                                 <div class="form-group">
                                     <div class="panel-footer">

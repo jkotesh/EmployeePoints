@@ -24,27 +24,30 @@ Add Employee
                             <section>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        {{ Form::ahText('name','Name :',$user->name,array('maxlength' => '100'))  }}
+                                        {{ Form::ahText('employeeno','Employee No :',$user->employeeno,array('maxlength' => '200'))  }}
                                     </div>
                                     <div class="col-sm-6">
+                                       {{ Form::ahText('name','Name :',$user->name,array('maxlength' => '100'))  }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
                                         {{ Form::ahText('email','Email :',$user->email,array('maxlength' => '100'))  }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                       {{ Form::ahNumber('mobileno','Mobile No :',$user->mobileno,array('min'=>'0','maxlength' => '11','max'=>'99999999999')) }}
                                     </div>
                                 </div><!-- end row -->
                                 <div class="row">
                                     <div class="col-sm-6">
-                                       {{ Form::ahNumber('mobileno','Mobile No :',$user->mobileno,array('min'=>'0','maxlength' => '11','max'=>'99999999999')) }}
-                                    </div>
-                                    <div class="col-sm-6">
                                         {{ Form::ahSelect('role_id','Role :',$user->role_id,$role) }}
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-sm-6">
                                        {{ Form::ahSelect('status','Status :',$user->status,array('1' => 'Active', '2' => 'Inactive')) }}
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="card-box">
 
                                             <h4 class="header-title m-t-0 m-b-30">Upload Profile Image</h4>

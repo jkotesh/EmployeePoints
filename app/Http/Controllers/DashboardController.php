@@ -40,7 +40,7 @@ class DashboardController extends Controller
 
         $employees = DB::table('admin_users')
                ->join('role', 'role.id', '=', 'admin_users.role_id')
-                ->select(DB::raw('admin_users.*,role.name as role_name,if(ifnull(admin_users.status,1)=1,"Active","Inactive") as status'))
+                ->select(DB::raw('admin_users.*,role.name as role_name,if(ifnull(admin_users.status,1)=1,"Active","Inactive") as status,employeeno'))
                 ->get();
         return view('dashboard.index', compact('employees'))         
         ->with('privileges',$privileges);
@@ -81,6 +81,7 @@ class DashboardController extends Controller
             $person = new AdminUsers();
             $person->name =  ucwords(Input::get('name'));
             $person->email =  Input::get('email');
+            $person->employeeno =  Input::get('employeeno');
             $person->password =  Hash::make(Input::get('password'));
             $person->role_id =  Input::get('role_id'); 
             $person->status =  Input::get('status');
@@ -102,7 +103,7 @@ class DashboardController extends Controller
             $log = new Log();
             $log->module_id=1;
             $log->action='create';      
-            $log->description='Employee ' . $person->name . ' Created Successfully!';
+            $log->description='Employee ' . $person->employeeno . ' Created Successfully!';
             $log->created_on=  Carbon::now(new DateTimeZone('Asia/Kolkata'));
             $log->user_id=Session::get('user_id'); 
             $log->category=1;    
@@ -151,6 +152,7 @@ class DashboardController extends Controller
             $person = AdminUsers::find($id);
             $person->name =  ucwords(Input::get('name'));
             $person->email =  Input::get('email');
+            $person->employeeno =  Input::get('employeeno');
             $person->role_id =  Input::get('role_id'); 
             $person->status =  Input::get('status');
             $person->mobileno = Input::get('mobileno');
@@ -182,7 +184,7 @@ class DashboardController extends Controller
             $log = new Log();
             $log->module_id=1;
             $log->action='update';      
-            $log->description='Employee ' . $person->name . ' Updated Successfully!';
+            $log->description='Employee ' . $person->employeeno . ' Updated Successfully!';
             $log->created_on= Carbon::now(new DateTimeZone('Asia/Kolkata'));
             $log->user_id=Session::get("user_id"); 
             $log->category=1;    

@@ -13,7 +13,8 @@ Points
                             <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                 <tr>
-                                    <th></th>
+                                    <th>Profile</th>
+                                    <th>Employee Id</th>
                                     <th>Name</th>
                                     <th>Date / Points</th>
                                     <th>Total Points</th>
@@ -32,13 +33,14 @@ Points
                                          $profile_image = env('APP_URL').'/assets/images/users/default.jpg';
                                        }
                                     ?>
-                                    <td>
+                                    <td width="5%">
                                       <div class="widget-user">
                                         <img src="<?php echo  $profile_image; ?>" class="img-responsive rounded-circle" alt="user">
                                        </div>
                                     </td>
-                                    <td><h3>{{$point['name']}}</h3></td>
-                                    <td>
+                                    <td width="7%"><h3>{{$point['employeeno']}}</h3></td>
+                                    <td width="15%"><h3>{{$point['name']}}</h3></td>
+                                    <td width="30%">
                                         <marquee style="font-size: x-large;" scrolldelay="90">
                                         @foreach($point['datewisepoints'] as $date)
                                              @if($date->points < 0)
