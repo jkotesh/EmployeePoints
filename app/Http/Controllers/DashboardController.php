@@ -99,7 +99,13 @@ class DashboardController extends Controller
                 $person->profile_image = env('APP_URL'). '/' . $employee_destinationDir.'/'. $filename;
                 $person->Update();
                 $files->move($employee_destinationDir,$filename);
-             }          
+             }  
+
+            $data = array('name'=>$users->full_name,'email'=> $users->email_address,'password' => $UserData['password'] ,'otp' => $otp);
+            Mail::send('layouts.registration_verify', $data, function($m) use ($data) {
+                  $m->from("points@samuhacreations.com", "Samuha");
+                  $m->to($data['email'])->subject('Points Management From Samuha');
+            });        
 
             $log = new Log();
             $log->module_id=1;
