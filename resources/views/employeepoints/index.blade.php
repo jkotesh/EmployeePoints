@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.employeemaster')
 @section('title')
 {{env('APP_NAME')}} | Points
 @endsection
