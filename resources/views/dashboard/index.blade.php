@@ -32,7 +32,8 @@ Employees
 
                                 <div class="wid-u-info">
                                     <h5 class="m-t-20 m-b-5">{{$employee->name}}</h5>
-                                    <h5 class="m-t-20 m-b-5">{{$employee->employeeno}}</h5>
+                                    <h5 class="m-t-20 m-b-5">{{$employee->designation}}</h5>
+                                    <!-- <h5 class="m-t-20 m-b-5">{{$employee->employeeno}}</h5> -->
                                     <p class="text-muted mb-0 font-13">{{$employee->email}}</p>
                                     <h2 data-plugin="counterup">{{$employee->total_points}}</h2>
                                     <div class="user-position">

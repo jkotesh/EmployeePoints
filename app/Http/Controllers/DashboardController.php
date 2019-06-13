@@ -84,6 +84,7 @@ class DashboardController extends Controller
             $person->employeeno =  Input::get('employeeno');
             $person->password =  Hash::make(Input::get('password'));
             $person->role_id =  Input::get('role_id'); 
+            $person->designation =  Input::get('designation'); 
             $person->status =  Input::get('status');
             $person->mobileno = Input::get('mobileno');
             $person->created_by =  Session::get('user_id');
@@ -154,6 +155,7 @@ class DashboardController extends Controller
             $person->email =  Input::get('email');
             $person->employeeno =  Input::get('employeeno');
             $person->role_id =  Input::get('role_id'); 
+            $person->designation =  Input::get('designation');
             $person->status =  Input::get('status');
             $person->mobileno = Input::get('mobileno');
             $person->modified_by =  Session::get('user_id');

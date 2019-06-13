@@ -45,6 +45,9 @@ Add Employee
                                     <div class="col-sm-6">
                                         {{ Form::ahSelect('role_id','Role :',null,$role) }}
                                     </div>
+                                    <div class="col-sm-6">
+                                         {{ Form::ahText('designation','Designation :','',array('maxlength' => '100'))  }}
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6">
