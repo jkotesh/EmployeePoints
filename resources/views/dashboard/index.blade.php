@@ -34,7 +34,18 @@ Employees
                                     <h5 class="m-t-20 m-b-5">{{$employee->name}}</h5>
                                     <h5 class="m-t-20 m-b-5">{{$employee->designation}}</h5>
                                     <!-- <h5 class="m-t-20 m-b-5">{{$employee->employeeno}}</h5> -->
-                                    <p class="text-muted mb-0 font-13">{{$employee->email}}</p>
+                                    <?php
+                                    if(strlen($employee->email)>20){
+
+                                        $email_body=substr($employee->email,0,20)."...";
+
+                                    }else{
+
+                                        $email_body=$employee->email;
+
+                                    }
+                                  ?>
+                                    <p class="text-muted mb-0 font-13">{{$email_body}}</p>
                                     <h2 data-plugin="counterup">{{$employee->total_points}}</h2>
                                     <div class="user-position">
                                        @if($privileges['Edit']=='true')
