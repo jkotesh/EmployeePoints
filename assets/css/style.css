@@ -143,6 +143,11 @@ a {
   }
 }
 
+@media screen and (min-width: 316px) and (max-width: 480px) {
+.card-box{
+  width: 585px;
+}
+}
 /*!
  * Waves v0.6.0
  * http://fian.my.id/Waves
