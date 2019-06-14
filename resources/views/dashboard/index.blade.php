@@ -83,4 +83,80 @@ Employees
                         </div>
                     </div>
                 </div>
+
+<?php if(!in_array(Session::get("role_id"),array(1)))
+        { ?>
+  <style>
+#chartdiv {
+  width: 100%;
+  height: 500px;
+}
+
+</style>
+<div class="row">
+  <div class="col-12">
+      <div class="card-box">
+                <div class="row m-t-50">
+                                <div class="col-sm-12 m-t-20">
+                                    <h4 class="header-title m-t-0">Date Wise Points</h4>
+                                    <div class="p-20">
+                                        <div id="chartdiv"></div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+ 
+<!-- Resources -->
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+<script>
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+var chart = am4core.create("chartdiv", am4charts.XYChart);
+chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+
+chart.data = <?php print_r(json_encode($date_wise_points)); ?>;
+
+
+var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+categoryAxis.renderer.grid.template.location = 0;
+categoryAxis.dataFields.category = "country";
+categoryAxis.renderer.minGridDistance = 40;
+
+var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+var series = chart.series.push(new am4charts.CurvedColumnSeries());
+series.dataFields.categoryX = "country";
+series.dataFields.valueY = "value";
+series.tooltipText = "{valueY.value}"
+series.columns.template.strokeOpacity = 0;
+
+series.columns.template.fillOpacity = 0.75;
+
+var hoverState = series.columns.template.states.create("hover");
+hoverState.properties.fillOpacity = 1;
+hoverState.properties.tension = 0.4;
+
+chart.cursor = new am4charts.XYCursor();
+
+// Add distinctive colors for each column using adapter
+series.columns.template.adapter.add("fill", (fill, target) => {
+  return chart.colors.getIndex(target.dataItem.index);
+});
+
+chart.scrollbarX = new am4core.Scrollbar();
+
+}); // end am4core.ready()
+</script>
+
+   <?php } ?>
 @endsection

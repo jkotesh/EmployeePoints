@@ -167,4 +167,27 @@ function employeedatewisepoints($employee_id)
         ->get();
     return $employeepoints;
 }
+
+function employeedetails($emp_id)
+{
+    $currentMonth = date('m');
+    $currentYear = date('Y');
+    $totaldays = cal_days_in_month(CAL_GREGORIAN,$currentMonth,$currentYear);
+    $today = new DateTime();
+    $lastDayOfThisMonth = new DateTime('last day of this month');
+    $nbOfDaysRemainingThisMonth =  $lastDayOfThisMonth->diff($today)->format('%a');
+    $days = $totaldays - $nbOfDaysRemainingThisMonth-1;
+    for ($ind = $days; $ind >= 0; $ind--)
+    {
+        $datepoints = [];
+        $date  = Carbon::now()->addDays(-1 * $ind)->formatLocalized('%Y-%m-%d');
+        $lastdates = new DateTime($date);
+        $datepoints['country'] =  $lastdates->format('d');
+        $point =  Points::where('date','=',$date)->where('employee_id','=',$emp_id)->first();
+        $datepoints['value'] = $point['points'];
+        $date_wise_points[] = $datepoints;
+    }
+
+    return $date_wise_points;
+}
 ?>

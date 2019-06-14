@@ -11,6 +11,7 @@ use View;
 use DB;
 use App\AdminUsers;
 use App\Role;
+use App\Points;
 use Input;
 use Session;
 use App\Log;
@@ -19,6 +20,7 @@ use Image;
 use Carbon\Carbon;
 use DateTimeZone;
 use Hash;
+use DateTime;
 use Illuminate\Support\Facades\Mail;
 
 class DashboardController extends Controller
@@ -47,6 +49,7 @@ class DashboardController extends Controller
                 ->select(DB::raw('admin_users.*,role.name as role_name,if(ifnull(admin_users.status,1)=1,"Active","Inactive") as status'))
                 ->where('admin_users.id','=',$employee_id)
                 ->get();
+            $date_wise_points = employeedetails($employee_id);
         }
         else
         {
@@ -54,8 +57,11 @@ class DashboardController extends Controller
                ->join('role', 'role.id', '=', 'admin_users.role_id')
                 ->select(DB::raw('admin_users.*,role.name as role_name,if(ifnull(admin_users.status,1)=1,"Active","Inactive") as status'))
                 ->get();
+            $date_wise_points = [];
         }
+        
         return view('dashboard.index', compact('employees'))         
+        ->with('date_wise_points',$date_wise_points)
         ->with('privileges',$privileges);
     }
 

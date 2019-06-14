@@ -46,7 +46,7 @@ class EmployeePointsController extends Controller
         $employees = AdminUsers::inRandomOrder()->get();
         if (count($employees) > 0) 
         {
-            $emp_id = 13;
+            $emp_id = $employees[0]->id;
             $emp_name = $employees[0]->name;
         }
         else
@@ -55,8 +55,12 @@ class EmployeePointsController extends Controller
             $emp_name = "";
         }
         $employee = AdminUsers::find($emp_id);
+        $role = Role::find($employee->role_id);
         $employeedetails = employeedatewisepoints($emp_id);
+        $date_wise_points = employeedetails($emp_id);
         return view('employeepoints.employeedetails', compact('employeedetails'))
-        ->with('employee',$employee);
+        ->with('employee',$employee)
+        ->with('date_wise_points',$date_wise_points)
+        ->with('role',$role);
     }
 }

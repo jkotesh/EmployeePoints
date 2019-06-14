@@ -12,6 +12,8 @@
     <!-- App Favicon -->
     <link rel="shortcut icon" href="{{ asset('assets/images/fav.png') }}">
 
+    <!--Chartist Chart CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/plugins/chartist/dist/chartist.min.css') }}">
     <!-- form Uploads -->
     <link href="{{ asset('assets/plugins/fileuploads/css/dropify.min.css') }}" rel="stylesheet" type="text/css" />
 
@@ -296,6 +298,8 @@
         <script src="{{ asset('assets/js/jquery.nicescroll.js') }}"></script>
         <script src="{{ asset('assets/plugins/switchery/switchery.min.js') }}"></script>
 
+        
+
         <!--Morris Chart-->
         <script src="{{ asset('assets/plugins/morris/morris.min.js') }}"></script>
         <script src="{{ asset('assets/plugins/raphael/raphael.min.js') }}"></script>
@@ -323,7 +327,7 @@
         <!-- file uploads js -->
         <script src="{{ asset('assets/plugins/fileuploads/js/dropify.min.js') }}"></script>
 
-
+        
         <!-- Counter Up  -->
         <script src="{{ asset('assets/plugins/waypoints/lib/jquery.waypoints.min.js') }}"></script>
         <script src="{{ asset('assets/plugins/counterup/jquery.counterup.js') }}"></script>
