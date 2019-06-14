@@ -41,9 +41,9 @@ Points
                     </div> 
                    <div class="col-md-6  col-xl-9">
                         <div class="card-box widget-user">
-                          <div class="row m-t-50">
+                          <div class="row m-t-20">
                                 <div class="col-sm-12 m-t-20">
-                                    <h4 class="header-title m-t-0">Date Wise Points</h4>
+                                    <h4 class="header-title m-t-0 text-center">Date Wise Points</h4>
                                     <div class="p-20">
                                         <div id="chartdiv"></div>
                                     </div>
