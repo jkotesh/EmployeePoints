@@ -147,6 +147,9 @@ a {
 .card-box{
   width: 585px;
 }
+.card-box h2{
+  float: left;
+}
 }
 /*!
  * Waves v0.6.0
