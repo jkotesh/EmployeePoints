@@ -31,9 +31,10 @@ Points
                                 ?>
                                 <img src="<?php echo  $profile_image; ?>" class="img-responsive rounded-circle" alt="user">
                                 <div class="wid-u-info">
-                                    <h5 class="m-t-20 m-b-5">{{$employee->name}}</h5>
-                                    <h5 class="m-t-20 m-b-5">{{$role->name}}</h5>
-                                    <h5 class="m-t-20 m-b-5">{{$employee->designation}}</h5>
+                                    <h5 class="m-t-20 m-b-5">{{$employee->employeeno}}</h5>
+                                    <h5 class="m-t-10 m-b-5">{{$employee->name}}</h5>
+                                    <h5 class="m-t-10 m-b-5">{{$role->name}}</h5>
+                                    <h5 class="m-t-10 m-b-5">{{$employee->designation}}</h5>
                                     <p class="text-muted mb-0 font-13">{{$employee->email}}</p>
                                 </div>
                             </div>
@@ -43,7 +44,7 @@ Points
                         <div class="card-box widget-user">
                           <div class="row m-t-20">
                                 <div class="col-sm-12 m-t-20">
-                                    <h4 class="header-title m-t-0 text-center">Date Wise Points</h4>
+                                    <h4 class="header-title m-t-0 text-center" style="font-size: 30px;position: relative;top: -21px;">Date Wise Points</h4>
                                     <div class="p-20">
                                         <div id="chartdiv"></div>
                                     </div>
@@ -57,7 +58,7 @@ Points
     {
         window.location = window.location.href;
     }
-    setInterval('autoRefreshPage()', 10000);
+    setInterval('autoRefreshPage()', 20000);
 </script>
  
 <!-- Resources -->

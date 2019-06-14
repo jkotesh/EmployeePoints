@@ -67,6 +67,6 @@ Points
     {
         window.location = window.location.href;
     }
-    setInterval('autoRefreshPage()', 10000);
+    setInterval('autoRefreshPage()', 20000);
 </script>
 @endsection
