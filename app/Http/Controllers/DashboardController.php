@@ -222,4 +222,28 @@ class DashboardController extends Controller
         }
 
     }
+    
+    public function destroy($id)
+    {
+        $user = AdminUsers::find($id);       
+       
+        if (is_null($user))
+        {
+         return Redirect::back()->with('warning','User Details Are Not Found!');
+        }
+        else
+        {
+           AdminUsers::find($id)->delete();
+            $log = new Log();
+            $log->module_id=1;
+            $log->action='delete';      
+            $log->description='Employee '. $user->name . ' Deleted Successfully!';
+            $log->created_on= Carbon::now(new DateTimeZone('Europe/London'));
+            $log->user_id=Session::get("user_id"); 
+            $log->category=1;    
+            $log->log_type=1;
+            createLog($log);
+           return Redirect::back()->with('success',$log->description);
+        }
+    }
 }

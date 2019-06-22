@@ -27,9 +27,10 @@ Points
                                     <?php } ?>
                                     <th>Points</th>
                                     <th>Comments</th>
-                                    @if($privileges['Edit']=='true')
                                     <th>Actions</th>
-                                    @endif
+                                    <!-- @if($privileges['Edit']=='true')
+                                    <th>Actions</th>
+                                    @endif -->
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -44,12 +45,28 @@ Points
                                     <?php } ?>
                                     <td>{{$point->points}}</td>
                                     <td>{{$point->comments}}</td>
-                                    @if($privileges['Edit']=='true')
+                                     <td width="20%">
+                            <div >
+                                <div style="float:left;padding-right:10px;">
+                                 @if($privileges['Edit']=='true')
+                                {{ link_to_route('points.edit','Edit',array($point->id), array('class' => 'btn btn-info')) }}
+                                @endif 
+                                </div>
+                                <div style="float:left;padding-right:10px;">
+                                   @if($privileges['Delete']=='true')
+                                    {{ Form::open(array('onsubmit' => 'return confirm("Are you sure you want to delete?")','method' => 'DELETE', 'route' => array('points.destroy', $point->id))) }}
+                                    <button type="submit" class="btn btn-danger btn-xs pull-right" style="padding: 10px 6px;">Delete</button>
+                                    {{ Form::close() }}
+                                   @endif
+                                </div>
+                            </div>
+                        </td>
+                                    <!-- @if($privileges['Edit']=='true')
                                     <td>
                                         <a href="{{env('ADMIN_URL')}}/points/{{$point->id}}/edit" style="cursor: pointer;font-size: x-large;">
                                         <i class="ion-compose"></i></a>
                                         </td>
-                                        @endif
+                                        @endif -->
                                 </tr>
                                 @endforeach
                                 </tbody>

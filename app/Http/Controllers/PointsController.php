@@ -220,7 +220,7 @@ class PointsController extends Controller
      */
     public function destroy($id)
     {
-        $user = AdminUsers::find($id);       
+        $user = Points::find($id);       
        
         if (is_null($user))
         {
@@ -228,11 +228,11 @@ class PointsController extends Controller
         }
         else
         {
-           AdminUsers::find($id)->delete();
+           Points::find($id)->delete();
             $log = new Log();
-            $log->module_id=1;
+            $log->module_id=2;
             $log->action='delete';      
-            $log->description='Admin User '. $user->email . ' Deleted Successfully!';
+            $log->description='Admin User '. $user->employee_id . ' Deleted Successfully!';
             $log->created_on= Carbon::now(new DateTimeZone('Europe/London'));
             $log->user_id=Session::get("user_id"); 
             $log->category=1;    

@@ -29,9 +29,10 @@ Employees
                                     <th>Team</th>
                                     <th>Designation</th>
                                     <th>Total Points</th>
-                                    @if($privileges['Edit']=='true')
+                                      <th>Actions</th>
+                                   <!--  @if($privileges['Edit']=='true')
                                     <th>Actions</th>
-                                    @endif
+                                    @endif -->
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -70,12 +71,32 @@ Employees
                                     <td width="15%">{{$employee->role_name}}</td>
                                     <td width="15%">{{$employee->designation}}</td>
                                     <td width="8%"> {{$employee->total_points}}</td>
+
+                                    <td width="20%">
+                            <div >
+                                <div style="float:left;padding-right:10px;">
+                                 @if($privileges['Edit']=='true')
+                                {{ link_to_route('dashboard.edit','Edit',array($employee->id), array('class' => 'btn btn-info')) }}
+                                @endif 
+                                </div>
+                                <div style="float:left;padding-right:10px;">
+                                   @if($privileges['Delete']=='true')
+                                    {{ Form::open(array('onsubmit' => 'return confirm("Are you sure you want to delete?")','method' => 'DELETE', 'route' => array('dashboard.destroy', $employee->id))) }}
+                                    <button type="submit" class="btn btn-danger btn-xs pull-right" style="padding: 10px 6px;">Delete</button>
+                                    {{ Form::close() }}
+                                   @endif
+                                </div>
+                            </div>
+                        </td>
+
+
+                                    <!-- 
                                     @if($privileges['Edit']=='true')
                                     <td>
                                         <a href="{{env('ADMIN_URL')}}/dashboard/{{$employee->id}}/edit" style="cursor: pointer;font-size: x-large;">
                                         <i class="ion-compose"></i></a>
                                         </td>
-                                        @endif
+                                        @endif -->
                                 </tr>
                                 @endforeach
                                 </tbody>
