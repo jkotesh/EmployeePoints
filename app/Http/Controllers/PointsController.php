@@ -197,6 +197,10 @@ class PointsController extends Controller
             $points->updated_at =   Carbon::now(new DateTimeZone('Asia/Kolkata'));
             $points ->update();
 
+            $employee = AdminUsers::find($points->employee_id);
+            $employee->total_points = $employee->total_points + $points->points;
+            $employee->Update();
+
             $log = new Log();
             $log->module_id=2;
             $log->action='update';      

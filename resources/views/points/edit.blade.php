@@ -32,7 +32,7 @@ Add Point
                                         <input type="hidden" name="employee_id" value="{{$point->employee_id}}">
                                     </div>
                                     <div class="col-sm-6">
-                                         {{ Form::ahNumber('points','Points :',$point->points,array('maxlength' => '11','max'=>'99999999999')) }}
+                                         {{ Form::ahNumber('points','Points :',$point->points,array('maxlength' => '11','max'=>'99999999999','step'=>'any')) }}
                                     </div>
                                 </div><!-- end row -->
                                 <div class="row">

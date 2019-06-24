@@ -28,11 +28,9 @@ Employees
                                     <th>Email</th>
                                     <th>Team</th>
                                     <th>Designation</th>
-                                    <th>Total Points</th>
-                                      <th>Actions</th>
-                                   <!--  @if($privileges['Edit']=='true')
+                                    @if($privileges['Edit']=='true')
                                     <th>Actions</th>
-                                    @endif -->
+                                    @endif
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -70,8 +68,6 @@ Employees
                                   </td>
                                     <td width="15%">{{$employee->role_name}}</td>
                                     <td width="15%">{{$employee->designation}}</td>
-                                    <td width="8%"> {{$employee->total_points}}</td>
-
                                     <td width="20%">
                             <div >
                                 <div style="float:left;padding-right:10px;">
@@ -86,17 +82,9 @@ Employees
                                     {{ Form::close() }}
                                    @endif
                                 </div>
-                            </div>
-                        </td>
+                                </div>
+                                </td>
 
-
-                                    <!-- 
-                                    @if($privileges['Edit']=='true')
-                                    <td>
-                                        <a href="{{env('ADMIN_URL')}}/dashboard/{{$employee->id}}/edit" style="cursor: pointer;font-size: x-large;">
-                                        <i class="ion-compose"></i></a>
-                                        </td>
-                                        @endif -->
                                 </tr>
                                 @endforeach
                                 </tbody>
