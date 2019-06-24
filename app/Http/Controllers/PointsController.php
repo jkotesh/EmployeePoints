@@ -224,19 +224,18 @@ class PointsController extends Controller
      */
     public function destroy($id)
     {
-        $user = Points::find($id);       
-       
+        $user = Points::find($id);   
         if (is_null($user))
         {
-         return Redirect::back()->with('warning','User Details Are Not Found!');
+         return Redirect::back()->with('warning','Points Details Are Not Found!');
         }
         else
         {
            Points::find($id)->delete();
             $log = new Log();
-            $log->module_id=2;
+            $log->module_id=1;
             $log->action='delete';      
-            $log->description='Admin User '. $user->employee_id . ' Deleted Successfully!';
+            $log->description='Point Deleted Successfully!';
             $log->created_on= Carbon::now(new DateTimeZone('Europe/London'));
             $log->user_id=Session::get("user_id"); 
             $log->category=1;    
