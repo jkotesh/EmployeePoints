@@ -60,7 +60,11 @@ Points
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <?php $total=0; ?>
                                 @foreach($points as $point)
+                                <?php 
+                                    $Points['totalpoints']  = $total+= $point->points;
+                                ?>
                                 <tr>
                                     <td>{{$point->date}}</td>
                                     <?php 
@@ -96,6 +100,7 @@ Points
                                 </tr>
                                 @endforeach
                                 </tbody>
+                                <?php echo ' <h2> Total Points : '.$Points['totalpoints'].'</h2>'; ?>
                             </table>
                         </div>
                     </div>
