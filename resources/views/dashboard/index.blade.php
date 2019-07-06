@@ -28,6 +28,8 @@ Employees
                                     <th>Email</th>
                                     <th>Team</th>
                                     <th>Designation</th>
+                                    <th>Overall Points</th>
+                                    <th>Status</th>
                                     @if($privileges['Edit']=='true')
                                     <th>Actions</th>
                                     @endif
@@ -68,16 +70,18 @@ Employees
                                   </td>
                                     <td width="15%">{{$employee->role_name}}</td>
                                     <td width="15%">{{$employee->designation}}</td>
+                                    <td width="15%">{{$employee->totalpoints}}</td>
+                                    <td width="15%">{{$employee->status}}</td>
                                     <td width="20%">
                             <div >
                                 <div style="float:left;padding-right:10px;">
                                  @if($privileges['Edit']=='true')
-                                {{ link_to_route('dashboard.edit','Edit',array($employee->id), array('class' => 'btn btn-info')) }}
+                                {{ link_to_route('dashboard.edit','Edit',array($employee->employee_id), array('class' => 'btn btn-info')) }}
                                 @endif 
                                 </div>
                                 <div style="float:left;padding-right:10px;">
                                    @if($privileges['Delete']=='true')
-                                    {{ Form::open(array('onsubmit' => 'return confirm("Are you sure you want to delete?")','method' => 'DELETE', 'route' => array('dashboard.destroy', $employee->id))) }}
+                                    {{ Form::open(array('onsubmit' => 'return confirm("Are you sure you want to delete?")','method' => 'DELETE', 'route' => array('dashboard.destroy', $employee->employee_id))) }}
                                     <button type="submit" class="btn btn-danger btn-xs pull-right" style="padding: 10px 6px;">Delete</button>
                                     {{ Form::close() }}
                                    @endif

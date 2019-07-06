@@ -44,19 +44,15 @@ class DashboardController extends Controller
         if(!in_array(Session::get("role_id"),array(1)))
         {
             $employee_id = Session::get("user_id");
-            $employees = DB::table('admin_users')
-               ->join('role', 'role.id', '=', 'admin_users.role_id')
-                ->select(DB::raw('admin_users.*,role.name as role_name,if(ifnull(admin_users.status,1)=1,"Active","Inactive") as status'))
-                ->where('admin_users.id','=',$employee_id)
-                ->get();
+            $UserData = array(
+                'employee_id' => $employee_id
+            );
+            $employees = v1_viewemployee($UserData);
             $date_wise_points = employeedetails($employee_id);
         }
         else
         {
-            $employees = DB::table('admin_users')
-               ->join('role', 'role.id', '=', 'admin_users.role_id')
-                ->select(DB::raw('admin_users.*,role.name as role_name,if(ifnull(admin_users.status,1)=1,"Active","Inactive") as status'))
-                ->get();
+            $employees = v1_employeelist();
             $date_wise_points = [];
         }
         

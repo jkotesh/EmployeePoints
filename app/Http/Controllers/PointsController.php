@@ -39,11 +39,27 @@ class PointsController extends Controller
         return $privileges;
      }
 
-    public function index()
+    public function index(Request $request)
     {
         if ( !Session::has('user_id') || Session::get('user_id') == '' )
         return Redirect::to('/admin');
         $privileges = $this->getPrivileges();
+        $months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        $years = ["2019","2020"];
+        if(isset($request['employee_id']))
+            $employee_id = $request['employee_id'];
+        else
+            $employee_id = 0;
+
+        if(isset($request['month']))
+            $emonth = $request['month'];
+        else
+            $emonth = 0;
+
+        if(isset($request['year']))
+            $year = $request['year'];
+        else
+            $year = 0;
         if(!in_array(Session::get("role_id"),array(1)))
         {
             $employee_id = Session::get("user_id");
@@ -51,15 +67,42 @@ class PointsController extends Controller
                 ->select(DB::raw('employee_points_daily.id,admin_users.name,employee_points_daily.points,date,comments'))
             ->where('employee_points_daily.employee_id','=',$employee_id)
             ->get();
+            $employees = AdminUsers::where('id','=',$employee_id)->get();
         }
-        else
+        else if(!empty($employee_id) && !empty($emonth) && !empty($year))
         {
+            $date = date_parse($emonth);
+            if($date['month'] < 10)
+            {
+                $month = '0'.$date['month'];
+            }
+            else
+            {
+                 $month = $date['month'];
+            }
+            $points = Points::join('admin_users', 'admin_users.id', '=', 'employee_points_daily.employee_id')
+                ->select(DB::raw('employee_points_daily.id,admin_users.name,employee_points_daily.points,date,comments'))
+            ->where('employee_points_daily.employee_id','=',$employee_id)
+            ->whereMonth('date', '=', $month)
+            ->whereYear('date','=',$year)
+            ->get();
+            $employees = AdminUsers::all();
+        }
+        else if($employee_id == 0 && $emonth == 0 && $year == 0)
+        {
+            $employees = AdminUsers::all();
             $points = Points::join('admin_users', 'admin_users.id', '=', 'employee_points_daily.employee_id')
                 ->select(DB::raw('employee_points_daily.id,admin_users.name,employee_points_daily.points,date,comments'))
             ->get();
         }
-
-         return View::make('points.index', compact('points'))         
+        
+        return View::make('points.index', compact('points'))         
+        ->with('months',$months)
+        ->with('years',$years)
+        ->with('employee_id',$employee_id)
+        ->with('month',$emonth)
+        ->with('year',$year)
+        ->with('employees',$employees)
         ->with('privileges',$privileges);
     }
     
