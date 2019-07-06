@@ -128,6 +128,9 @@
                             <li>
                                 <a href="{{env('ADMIN_URL')}}/points"><i class="zmdi zmdi-view-dashboard"></i> <span> Points </span> </a>
                             </li>
+                            <li>
+                                <a href="{{env('ADMIN_URL')}}/employeepointsoverall"><i class="zmdi zmdi-view-dashboard"></i> <span> Overall Points </span> </a>
+                            </li>
                          <?php
                             if(in_array(Session::get("role_id"),array(1)))
                             { ?> 
