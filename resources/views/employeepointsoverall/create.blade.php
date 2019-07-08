@@ -29,7 +29,7 @@ Add Overall Point
                                         <label>Month :</label>
                                     <select class="custom-select mb-4 mr-sm-4 mb-sm-0" id="month" name="month">
                                         <?php for($i=0;$i<count($months);$i++){ ?>
-                                        <option value="<?php echo $months[$i]; ?>" <?php if($months[$i] == date("F", strtotime('m'))) { echo 'selected';} ?>><?php echo $months[$i]; ?></option>
+                                        <option value="<?php echo $months[$i]; ?>" <?php if($months[$i] == date("F", strtotime('m'))) { echo "selected = 'slected'";} ?>><?php echo $months[$i]; ?></option>
                                         <?php } ?>
                                     </select>
                                     </div>
@@ -42,25 +42,25 @@ Add Overall Point
                                     </select>
                                     </div>
                                     <div class="col-sm-6">
-                                         {{ Form::ahNumber('performance_total_points','Performance Total Points :','',array('maxlength' => '11','max'=>'99999999999','step'=>'any')) }}
+                                         {{ Form::ahNumber('performance_total_points','Performance Total Points :','0.00',array('maxlength' => '11','max'=>'99999999999','step'=>'any')) }}
                                     </div>
                                     <div class="col-sm-6">
-                                         {{ Form::ahNumber('cl_leave_point','CL Leave Point :','',array('maxlength' => '11','max'=>'99999999999','step'=>'any')) }}
+                                         {{ Form::ahNumber('cl_leave_point','CL Leave Point :','0.00',array('maxlength' => '11','max'=>'99999999999','step'=>'any')) }}
                                     </div>
                                     <div class="col-sm-6">
-                                         {{ Form::ahNumber('sl_leave_point','SL Leave Point :','',array('maxlength' => '11','max'=>'99999999999','step'=>'any')) }}
+                                         {{ Form::ahNumber('sl_leave_point','SL Leave Point :','0.00',array('maxlength' => '11','max'=>'99999999999','step'=>'any')) }}
                                     </div>
                                      <div class="col-sm-6">
-                                         {{ Form::ahNumber('points_from_tl','Points from TL :','',array('maxlength' => '11','max'=>'99999999999','step'=>'any')) }}
+                                         {{ Form::ahNumber('points_from_tl','Points from TL :','0.00',array('maxlength' => '11','max'=>'99999999999','step'=>'any')) }}
                                     </div>
                                      <div class="col-sm-6">
-                                         {{ Form::ahNumber('points_from_management','Points from Management :','',array('maxlength' => '11','max'=>'99999999999','step'=>'any')) }}
+                                         {{ Form::ahNumber('points_from_management','Points from Management :','0.00',array('maxlength' => '11','max'=>'99999999999','step'=>'any')) }}
                                     </div>
                                     <div class="col-sm-6">
-                                         {{ Form::ahNumber('early_login_and_logout_point','Early Login And Logout Point :','',array('maxlength' => '11','max'=>'99999999999','step'=>'any')) }}
+                                         {{ Form::ahNumber('early_login_and_logout_point','Early Login And Logout Point :','0.00',array('maxlength' => '11','max'=>'99999999999','step'=>'any')) }}
                                     </div>
                                      <div class="col-sm-6">
-                                         {{ Form::ahNumber('total_points','Total Points :','',array('maxlength' => '11','max'=>'99999999999','step'=>'any')) }}
+                                         {{ Form::ahNumber('total_points','Total Points :','0.00',array('maxlength' => '11','max'=>'99999999999','step'=>'any')) }}
                                     </div>
                                     <div class="col-sm-6">
                                        <div class="form-group clearfix">
@@ -98,9 +98,19 @@ $.ajax({
     data: JSON.stringify( { "employee_id": $('#employee_id').val(), "month": $('#month').val(), "year": $('#year').val() } ),
     processData: false,
     success: function( data, textStatus, jQxhr ){
-        console.log( data );
-        $('#performance_total_points').val(data.result.totalpoints);
-        //$('#response pre').html( JSON.stringify( data ) );
+        //console.log( data.result.totalpoints );
+        if(data.result.length == 0)
+        {
+            $('#performance_total_points').val("0.00");
+            var performance_total_points = "0.00";
+        }
+        else
+        {
+            $('#performance_total_points').val(data.result.totalpoints);
+            var performance_total_points = data.result.totalpoints;
+        }
+        overallPoints(performance_total_points);
+        
     },
     error: function( jqXhr, textStatus, errorThrown ){
         console.log( errorThrown );
@@ -117,9 +127,18 @@ $("#employee_id").change(function()
         data: JSON.stringify( { "employee_id": $('#employee_id').val(), "month": $('#month').val(), "year": $('#year').val() } ),
         processData: false,
         success: function( data, textStatus, jQxhr ){
-            console.log( data);
-            $('#performance_total_points').val(data.result.totalpoints);
-            //$('#response pre').html( JSON.stringify( data ) );
+            console.log( data.result.totalpoints );
+            if(data.result.length == 0)
+            {
+                $('#performance_total_points').val("0.00");
+                var performance_total_points = "0.00";
+            }
+            else
+            {
+                $('#performance_total_points').val(data.result.totalpoints);
+                var performance_total_points = data.result.totalpoints;
+            }
+            overallPoints(performance_total_points);
         },
         error: function( jqXhr, textStatus, errorThrown ){
             console.log( errorThrown );
@@ -137,9 +156,18 @@ $("#month").change(function()
         data: JSON.stringify( { "employee_id": $('#employee_id').val(), "month": $('#month').val(), "year": $('#year').val() } ),
         processData: false,
         success: function( data, textStatus, jQxhr ){
-            console.log( data.result.totalpoints );
-            $('#performance_total_points').val(data.result.totalpoints);
-            //$('#response pre').html( JSON.stringify( data ) );
+            console.log( data.result.length );
+            if(data.result.length == 0)
+            {
+                $('#performance_total_points').val("0.00");
+                var performance_total_points = "0.00";
+            }
+            else
+            {
+                $('#performance_total_points').val(data.result.totalpoints);
+                var performance_total_points = data.result.totalpoints;
+            }
+            overallPoints(performance_total_points);
         },
         error: function( jqXhr, textStatus, errorThrown ){
             console.log( errorThrown );
@@ -158,8 +186,17 @@ $("#year").change(function()
         processData: false,
         success: function( data, textStatus, jQxhr ){
             console.log( data.result.totalpoints );
-            $('#performance_total_points').val(data.result.totalpoints);
-            //$('#response pre').html( JSON.stringify( data ) );
+            if(data.result.length == 0)
+            {
+                $('#performance_total_points').val("0.00");
+                var performance_total_points = "0.00";
+            }
+            else
+            {
+                $('#performance_total_points').val(data.result.totalpoints);
+                var performance_total_points = data.result.totalpoints;
+            }
+            overallPoints(performance_total_points);
         },
         error: function( jqXhr, textStatus, errorThrown ){
             console.log( errorThrown );
@@ -167,11 +204,24 @@ $("#year").change(function()
     });
 });
 
-$("#").keydown(function(){
-    $("input").css("background-color", "yellow");
-  });
-  $("input").keyup(function(){
-    $("input").css("background-color", "pink");
-  });
+function financial(x) 
+{
+  return Number.parseFloat(x).toFixed(2);
+}
+
+function overallPoints(performance_total_points)
+{
+    var cl_leave_point =  $('#cl_leave_point').val();
+    var sl_leave_point =  $('#sl_leave_point').val();
+    var points_from_tl =  $('#points_from_tl').val();
+    var points_from_management =  $('#points_from_management').val();
+    var early_login_and_logout_point =  $('#early_login_and_logout_point').val();
+
+    var overaltotalpoints = parseFloat(performance_total_points) + parseFloat(cl_leave_point) + parseFloat(sl_leave_point) + parseFloat(points_from_tl) + parseFloat(points_from_management) + parseFloat(early_login_and_logout_point);
+    var financialpoints = financial(overaltotalpoints);
+    $('#total_points').val(financialpoints);
+    console.log(financialpoints);
+}
+
 </script>
 @endsection
