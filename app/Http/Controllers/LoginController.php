@@ -143,7 +143,7 @@ class LoginController extends Controller
 
         if ($validator->fails()) 
         {
-            return View::make('login.forgot')
+            return View::make('auth.passwords.email')
             ->withInput()
             ->withErrors($validator)
             ->with('errors', 'There were validation errors.');
@@ -158,10 +158,10 @@ class LoginController extends Controller
         {
             $data = array('hash' => $login_details[0]->reset_hash ,'name'=>$login_details[0]->name,'email'=> $login_details[0]->email);          
             Mail::send('layouts.forgotpassword', $data, function($m) use ($data) {
-                $m->from('info@advisrtech.com', 'Talent Test');
+                $m->from('info@samuhacreations.com', 'Samuha Creations');
                 $m->to($data['email'])->subject('Forgot Password!');
             });
-           return redirect('/login')->with('success','We Have Mailed Your Reset Password Link!');
+           return redirect('/admin')->with('success','We Have Mailed Your Reset Password Link!');
         }
         else{
              return \Redirect::back()->withErrors( 'Invalid Email')
@@ -194,7 +194,7 @@ class LoginController extends Controller
                 $password = Hash::make($input['newpassword']);
                 $resetpassword = "UPDATE admin_users SET password ='".$password."' WHERE email ='".$email."' and reset_hash='".$hash."'";
                 DB::select(DB::raw($resetpassword));
-              return redirect('/login')->with('success','Updated Password!');  
+              return redirect('/admin')->with('success','Updated Password!');  
             }
             else
             {

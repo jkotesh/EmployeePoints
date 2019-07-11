@@ -33,7 +33,7 @@ Route::post('editemployee','RestApiGeneralController@V1_EditEmployee');
 Route::post('deleteemployee','RestApiGeneralController@V1_DeleteEmployee');
 
 Route::get('pointslist','RestApiGeneralController@V1_PointsList');
-Route::get('addpoints','RestApiGeneralController@V1_AddPoints');
+Route::post('addpoints','RestApiGeneralController@V1_AddPoints');
 Route::post('editpoints','RestApiGeneralController@V1_EditPoints');
 Route::post('deletepoints','RestApiGeneralController@V1_DeletePoints');
 });

@@ -258,9 +258,9 @@ function v1_employeelist()
 {
     $employees = AdminUsers::join('role', 'role.id', '=', 'admin_users.role_id')
                ->leftjoin('employee_points_daily', 'employee_points_daily.employee_id', '=', 'admin_users.id')
-                ->select(DB::raw('admin_users.id as employee_id,admin_users.name,role.name as role_name,admin_users.email,admin_users.profile_image,sum(employee_points_daily.points) as totalpoints,employeeno,admin_users.designation,if(ifnull(admin_users.status,1)=1,"Active","Inactive") as status'))
+                ->select(DB::raw('admin_users.id as employee_id,admin_users.name,role.name as role_name,admin_users.email,admin_users.profile_image,sum(employee_points_daily.points) as totalpoints,employeeno,admin_users.designation,if(ifnull(admin_users.status,1)=1,"Active","Inactive") as status,admin_users.role_id,admin_users.mobileno'))
                 ->where('admin_users.id','!=',1)
-                ->Groupby('admin_users.id','admin_users.email','admin_users.name','role.name','profile_image','employeeno','designation','admin_users.status')
+                ->Groupby('admin_users.id','admin_users.email','admin_users.name','role.name','profile_image','employeeno','designation','admin_users.status','admin_users.role_id','admin_users.mobileno')
                 ->Orderby('totalpoints','desc')
                 ->get();
     return $employees;
@@ -440,9 +440,9 @@ function v1_viewemployee($UserData)
 {
     $employees = AdminUsers::join('role', 'role.id', '=', 'admin_users.role_id')
                ->leftjoin('employee_points_daily', 'employee_points_daily.employee_id', '=', 'admin_users.id')
-                ->select(DB::raw('admin_users.id as employee_id,admin_users.name,role.name as role_name,admin_users.email,admin_users.profile_image,sum(employee_points_daily.points) as totalpoints,employeeno,admin_users.designation,if(ifnull(admin_users.status,1)=1,"Active","Inactive") as status'))
+                ->select(DB::raw('admin_users.id as employee_id,admin_users.name,role.name as role_name,admin_users.email,admin_users.profile_image,sum(employee_points_daily.points) as totalpoints,employeeno,admin_users.designation,if(ifnull(admin_users.status,1)=1,"Active","Inactive") as status,admin_users.mobileno,admin_users.role_id'))
                 ->where('admin_users.id','=',$UserData['employee_id'])
-                ->Groupby('admin_users.id','admin_users.email','admin_users.name','role.name','profile_image','employeeno','designation','admin_users.status')
+                ->Groupby('admin_users.id','admin_users.email','admin_users.name','role.name','profile_image','employeeno','designation','admin_users.status','admin_users.mobileno','admin_users.role_id')
                 ->Orderby('totalpoints','desc')
                 ->get();
     return $employees;

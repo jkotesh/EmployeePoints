@@ -50,12 +50,12 @@ Overall Points
                                     ?>
                                     <th>Name</th>
                                     <?php } ?>
-                                    <th>Performance Total Points</th>
+                                    <th>Performance <br>Total Points</th>
                                     <th>CL Leave Point</th>
                                     <th>SL Leave Point</th>
-                                    <th>Early Login And Logout Point</th>
+                                    <th>Early Login <br>And Logout Point</th>
                                     <th>Points from TL</th>
-                                    <th>Points from Management</th>
+                                    <th>Points from <br>Management</th>
                                     <th>Total Points</th>
                                     <th>Comments</th>
                                     @if($privileges['Edit']=='true')
@@ -85,12 +85,12 @@ Overall Points
                                         <div >
                                             <div style="float:left;padding-right:10px;">
                                              @if($privileges['Edit']=='true')
-                                            {{ link_to_route('points.edit','Edit',array($point->id), array('class' => 'btn btn-info')) }}
+                                            {{ link_to_route('employeepointsoverall.edit','Edit',array($point->id), array('class' => 'btn btn-info')) }}
                                             @endif 
                                             </div>
                                             <div style="float:left;padding-right:10px;">
                                                @if($privileges['Delete']=='true')
-                                                {{ Form::open(array('onsubmit' => 'return confirm("Are you sure you want to delete?")','method' => 'DELETE', 'route' => array('points.destroy', $point->id))) }}
+                                                {{ Form::open(array('onsubmit' => 'return confirm("Are you sure you want to delete?")','method' => 'DELETE', 'route' => array('employeepointsoverall.destroy', $point->id))) }}
                                                 <button type="submit" class="btn btn-danger btn-xs pull-right" style="padding: 10px 6px;">Delete</button>
                                                 {{ Form::close() }}
                                                @endif

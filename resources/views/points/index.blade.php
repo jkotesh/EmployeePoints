@@ -12,18 +12,18 @@
     <select class="custom-select mb-4 mr-sm-4 mb-sm-0" id="employee_id" name="employee_id">
         <option selected="0">Choose Employee</option>
         @foreach($employees as $employee)
-        <option value="{{$employee->id}}" <?php if($employee->id == $employee_id) { echo 'selected';} ?> >{{$employee->name}}</option>
+        <option value="{{$employee->id}}" <?php if($employee->id == $employee_id) { echo "selected = 'slected'";} ?> >{{$employee->name}}</option>
         @endforeach
     </select>
     <select class="custom-select mb-4 mr-sm-4 mb-sm-0" id="month" name="month">
         <option selected="0">Choose Month</option>
         <?php for($i=0;$i<count($months);$i++){ ?>
-        <option value="<?php echo $months[$i]; ?>" <?php if($months[$i] == $month) { echo 'selected';} ?>><?php echo $months[$i]; ?></option>
+        <option value="<?php echo $months[$i]; ?>" <?php if($months[$i] == $month) { echo "selected = 'slected'";} ?>><?php echo $months[$i]; ?></option>
         <?php } ?>
     </select>
     <select class="custom-select mb-4 mr-sm-4 mb-sm-0" id="year" name="year">
         <?php for($i=0;$i<count($years);$i++){ ?>
-        <option value="<?php echo $years[$i]; ?>" <?php if($years[$i] == $year) { echo 'selected';} ?>><?php echo $years[$i]; ?></option>
+        <option value="<?php echo $years[$i]; ?>" <?php if($years[$i] == $year) { echo "selected = 'slected'";} ?>><?php echo $years[$i]; ?></option>
         <?php } ?>
     </select>
     <button type="submit" class="btn btn-primary">Submit</button>

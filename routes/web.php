@@ -10,12 +10,22 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+use Illuminate\Http\Request;
 Route::group(['prefix' => 'admin'], function () 
 {
+	Auth::routes();
 	Route::resource('/', 'LoginController');
 	Route::post('validateuser', array('as' => 'validateuser', 'uses' => 'LoginController@validateuser'));
-
+	Route::get('/forgot', function () {
+    return view('login.forgot');
+	});
+	Route::get('/resetpassword', function (Request $request) {
+		$token = $request->hash;
+		$email = $request->email;
+	    return view('auth.passwords.reset')->with('token',$token)->with('email',$email);
+	});
+	Route::post('forgot', array('as' => 'forgot', 'uses' => 'LoginController@forgot'));
+	Route::post('resetpassword', array('as' => 'resetpassword', 'uses' => 'LoginController@resetpassword'));
 	Route::resource('dashboard', 'DashboardController');
 	Route::get('logout', 'LoginController@logout');
 	Route::resource('profile', 'ProfileController');
